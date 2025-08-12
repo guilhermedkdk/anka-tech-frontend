@@ -1,26 +1,133 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --primary: #13c4f1;
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: #dadada;
+  --input: oklch(0.922 0 0);
+  --ring: #13c4f1;
+  --background: #f5f5f5;
+  --foreground: #1c1b1b;
+  --text-large: #1c1b1b;
+  --text-small: #afafaf;
+}
+
+.dark {
+  --background: #2d2d2d;
+  --foreground: #f8f8f8;
+  --card: #292929;
+  --card-foreground: #f8f8f8;
+  --primary: #13c4f1;
+  --primary-foreground: #292929;
+  --secondary: #292929;
+  --secondary-foreground: #f8f8f8;
+  --muted: #292929;
+  --muted-foreground: #d1d1d1;
+  --accent: #292929;
+  --accent-foreground: #f8f8f8;
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: #424242;
+  --input: #292929;
+  --ring: #13c4f1;
+  --text-large: #f8f8f8;
+  --text-small: #d1d1d1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Remove transições de cor para troca de tema */
+* {
+  transition: none !important;
+}
+
+/* Mantém apenas transições específicas que não são relacionadas ao tema */
+.animate-spin,
+.animate-pulse,
+.animate-bounce,
+.animate-ping,
+.toggle-light-thumb,
+.toggle-dark-thumb,
+.toggle-thumb-left,
+.toggle-thumb-right {
+  transition: all 0.3s ease-in-out !important;
+}
+
+.text-large {
+  color: var(--text-large);
+}
+
+.text-small {
+  color: var(--text-small);
+}
+
+/* Classes utilitárias para o toggle de tema */
+.toggle-light {
+  background-color: #bbeefb;
+  border: 1px solid #bbeefb;
+}
+
+.toggle-light-thumb {
+  background-color: var(--primary);
+  transition: transform 0.3s ease-in-out;
+}
+
+.toggle-dark {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+}
+
+.toggle-dark-thumb {
+  background-color: #5269d1;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Posições do toggle */
+.toggle-thumb-left {
+  transform: translateX(4px);
+}
+
+.toggle-thumb-right {
+  transform: translateX(20px);
 }
