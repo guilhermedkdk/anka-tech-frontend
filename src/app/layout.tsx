@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { LayoutWrapper } from '@/components/layout-wrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
   subsets: ['latin'],
 });
 
@@ -25,10 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className={`${geistSans.variable} antialiased`}>
+        <ThemeProvider>
+          <div className="fixed top-6 right-6 z-50">
+            <ThemeToggle />
+          </div>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -7,7 +6,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -44,6 +42,14 @@
   --foreground: #1c1b1b;
   --text-large: #1c1b1b;
   --text-small: #afafaf;
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #d9d9d9;
+  --sidebar-text: #6b7280;
+  --sidebar-text-active: #374151;
+  --sidebar-hover: #f9fafb;
+  --sidebar-active: #ededed;
+  --logo-bg: #3b82f6;
+  --logo-text: #ffffff;
 }
 
 .dark {
@@ -66,6 +72,14 @@
   --ring: #13c4f1;
   --text-large: #f8f8f8;
   --text-small: #d1d1d1;
+  --sidebar-bg: #1f2937;
+  --sidebar-border: #1b1b1b;
+  --sidebar-text: #9ca3af;
+  --sidebar-text-active: #f9fafb;
+  --sidebar-hover: #374151;
+  --sidebar-active: #464646;
+  --logo-bg: #3b82f6;
+  --logo-text: #ffffff;
 }
 
 @layer base {
@@ -74,6 +88,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
@@ -129,5 +144,98 @@
 }
 
 .toggle-thumb-right {
-  transform: translateX(20px);
+  transform: translateX(22px);
+}
+
+/* Classes para a Sidebar */
+.sidebar {
+  background-color: transparent;
+  position: relative;
+}
+
+/* Linha da borda direita respeitando o padding */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 32px;
+  bottom: 32px;
+  right: 0;
+  width: 1px;
+  background-color: var(--sidebar-border);
+}
+
+.sidebar-logo {
+  background-color: var(--logo-bg);
+  color: var(--logo-text);
+}
+
+.sidebar-text {
+  color: var(--sidebar-text);
+}
+
+.sidebar-text-active {
+  color: var(--sidebar-text-active);
+}
+
+.sidebar-hover {
+  background-color: var(--sidebar-hover);
+}
+
+.sidebar-active {
+  background-color: var(--sidebar-active);
+}
+
+/* Ícones da sidebar: assets brancos convertidos para escuros no tema claro */
+.sidebar-icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+}
+
+.dark .sidebar-icon {
+  filter: invert(0);
+}
+
+/* Ícone com cor fixa (não inverter) */
+.sidebar-icon-fixed {
+  filter: none !important;
+}
+
+/* Icone do botão de menu usando mask para herdar cor da variável */
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  -webkit-mask: url('/icons/menu.svg') no-repeat center;
+  mask: url('/icons/menu.svg') no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: var(--text-small);
+}
+
+/* Novo: máscara genérica para ícones herdarem a cor atual (currentColor) */
+.sidebar-icon-mask {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-color: currentColor;
+}
+
+/* Padding personalizado para páginas principais */
+.main-page-padding {
+  padding: 24px 32px;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+/* Versão responsiva para telas maiores */
+@media (min-width: 1024px) {
+  .main-page-padding {
+    padding: 32px 48px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .main-page-padding {
+    padding: 40px 64px;
+  }
 }

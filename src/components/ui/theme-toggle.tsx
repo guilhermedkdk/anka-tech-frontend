@@ -30,7 +30,6 @@ export function ThemeToggle() {
         {isLight ? 'Modo claro' : 'Modo escuro'}
       </span>
       <button
-        onClick={() => setTheme(isLight ? 'dark' : 'light')}
         className={`relative inline-flex h-6 w-11 items-center rounded-full focus:outline-none ${
           isLight ? 'toggle-light' : 'toggle-dark'
         }`}
@@ -39,11 +38,15 @@ export function ThemeToggle() {
         aria-label={`Alternar para ${isLight ? 'modo escuro' : 'modo claro'}`}
       >
         <span
+          onClick={(e) => {
+            e.stopPropagation();
+            setTheme(isLight ? 'dark' : 'light');
+          }}
           className={`inline-block h-4 w-4 rounded-full shadow-lg ${
             isLight
               ? 'toggle-light-thumb toggle-thumb-right'
               : 'toggle-dark-thumb toggle-thumb-left'
-          }`}
+          } cursor-pointer`}
         />
       </button>
     </div>
