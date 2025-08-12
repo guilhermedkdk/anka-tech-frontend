@@ -20,6 +20,8 @@
   --color-primary: var(--primary);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-text-success: var(--text-success);
+  --color-text-success-subtle: var(--text-success-subtle);
 }
 
 :root {
@@ -50,6 +52,8 @@
   --sidebar-active: #ededed;
   --logo-bg: #3b82f6;
   --logo-text: #ffffff;
+  --text-success: #16a34a;
+  --text-success-subtle: #0d8701;
 }
 
 .dark {
@@ -80,6 +84,8 @@
   --sidebar-active: #464646;
   --logo-bg: #3b82f6;
   --logo-text: #ffffff;
+  --text-success: #91d88a;
+  --text-success-subtle: #91d88a;
 }
 
 @layer base {
@@ -115,6 +121,14 @@
 
 .text-small {
   color: var(--text-small);
+}
+
+.text-success {
+  color: var(--text-success);
+}
+
+.text-success-subtle {
+  color: var(--text-success-subtle);
 }
 
 /* Classes utilitárias para o toggle de tema */
