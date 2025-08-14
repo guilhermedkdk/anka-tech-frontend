@@ -24,7 +24,7 @@ export default function DashboardPage() {
     },
     {
       name: 'Math Smith',
-      metaAnual: 'R$ 40.0 M',
+      metaAnual: 'R$ 40.9 M',
       captadoAnual: 'R$ 130.0 M',
       indiceSemestral: 'R$ 225.43 %',
       metaMensal: 'R$ 5.0 M',
@@ -32,19 +32,19 @@ export default function DashboardPage() {
       percMensal: 'R$ 245.00 %',
     },
     {
-      name: 'Philip West',
+      name: 'Philip Wave',
       metaAnual: 'R$ 39.0 M',
       captadoAnual: 'R$ 90.0 M',
-      indiceSemestral: 'R$ 200.54 %',
+      indiceSemestral: 'R$ 290.43 %',
       metaMensal: 'R$ 3.8 M',
       captadoMensal: 'R$ 16.7 M',
       percMensal: 'R$ 398.23 %',
     },
     {
-      name: 'Tim Rines',
+      name: 'Tim Pines',
       metaAnual: 'R$ 35.0 M',
       captadoAnual: 'R$ 98.0 M',
-      indiceSemestral: 'R$ 179.00 %',
+      indiceSemestral: 'R$ 178.00 %',
       metaMensal: 'R$ 5.0 M',
       captadoMensal: 'R$ 18.2 M',
       percMensal: 'R$ 180.00 %',
@@ -53,9 +53,9 @@ export default function DashboardPage() {
       name: 'Carol Stevens',
       metaAnual: 'R$ 30.0 M',
       captadoAnual: 'R$ 135.0 M',
-      indiceSemestral: 'R$ 200.54 %',
+      indiceSemestral: 'R$ 200.43 %',
       metaMensal: 'R$ 3.0 M',
-      captadoMensal: 'R$ 18.2 M',
+      captadoMensal: 'R$ 15.2 M',
       percMensal: 'R$ 220.23 %',
     },
     {
@@ -68,7 +68,7 @@ export default function DashboardPage() {
       percMensal: 'R$ 178.23 %',
     },
     {
-      name: "Michael O'Vally",
+      name: "Michael O'Valey",
       metaAnual: 'R$ 27.5 M',
       captadoAnual: 'R$ 100.0 M',
       indiceSemestral: 'R$ 200.20 %',
@@ -84,6 +84,33 @@ export default function DashboardPage() {
       metaMensal: 'R$ 5.0 M',
       captadoMensal: 'R$ 22.0 M',
       percMensal: 'R$ 99.8 %',
+    },
+    {
+      name: 'Alex Rodriguez',
+      metaAnual: 'R$ 35.0 M',
+      captadoAnual: 'R$ 28.0 M',
+      indiceSemestral: 'R$ 80.00 %',
+      metaMensal: 'R$ 4.0 M',
+      captadoMensal: 'R$ 2.8 M',
+      percMensal: 'R$ 70.00 %',
+    },
+    {
+      name: 'Maria Silva',
+      metaAnual: 'R$ 42.0 M',
+      captadoAnual: 'R$ 31.5 M',
+      indiceSemestral: 'R$ 75.00 %',
+      metaMensal: 'R$ 4.5 M',
+      captadoMensal: 'R$ 2.7 M',
+      percMensal: 'R$ 60.00 %',
+    },
+    {
+      name: 'Carlos Santos',
+      metaAnual: 'R$ 38.0 M',
+      captadoAnual: 'R$ 26.6 M',
+      indiceSemestral: 'R$ 70.00 %',
+      metaMensal: 'R$ 3.8 M',
+      captadoMensal: 'R$ 2.3 M',
+      percMensal: 'R$ 60.53 %',
     },
     {
       name: 'Sarah Wilson',
@@ -272,16 +299,34 @@ export default function DashboardPage() {
       {/* Seletor de mês */}
       <div className="flex justify-end mb-0">
         <Select defaultValue="janeiro">
-          <SelectTrigger className="w-32 bg-card rounded-2xl border-border flex items-center justify-center text-center text-sm font-normal py-2 text-foreground focus:!border-primary focus:!ring-0 transform -translate-y-4">
+          <SelectTrigger className="w-32 bg-card rounded-2xl border-border flex items-center justify-center text-center text-sm font-normal py-2 text-foreground focus:!border-primary focus:!ring-0 cursor-pointer transform -translate-y-4">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="bg-card/80 backdrop-blur-sm border-border shadow-lg">
-            <SelectItem value="janeiro">Janeiro</SelectItem>
-            <SelectItem value="fevereiro">Fevereiro</SelectItem>
-            <SelectItem value="marco">Março</SelectItem>
-            <SelectItem value="abril">Abril</SelectItem>
-            <SelectItem value="maio">Maio</SelectItem>
-            <SelectItem value="junho">Junho</SelectItem>
+            <SelectItem
+              value="janeiro"
+              className="cursor-pointer hover:bg-muted"
+            >
+              Janeiro
+            </SelectItem>
+            <SelectItem
+              value="fevereiro"
+              className="cursor-pointer hover:bg-muted"
+            >
+              Fevereiro
+            </SelectItem>
+            <SelectItem value="marco" className="cursor-pointer hover:bg-muted">
+              Março
+            </SelectItem>
+            <SelectItem value="abril" className="cursor-pointer hover:bg-muted">
+              Abril
+            </SelectItem>
+            <SelectItem value="maio" className="cursor-pointer hover:bg-muted">
+              Maio
+            </SelectItem>
+            <SelectItem value="junho" className="cursor-pointer hover:bg-muted">
+              Junho
+            </SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -300,6 +345,34 @@ export default function DashboardPage() {
           data={assessors}
           searchPlaceholder="Buscar"
           itemsPerPage={8}
+          getCellClassName={(key, value, item) => {
+            // Valores específicos que devem aparecer em vermelho
+            if (
+              String(item.name) === 'Philip Wave' &&
+              (key === 'captadoAnual' || key === 'indiceSemestral')
+            ) {
+              return 'text-danger';
+            }
+            if (
+              String(item.name) === 'Carol Stevens' &&
+              (key === 'captadoMensal' || key === 'percMensal')
+            ) {
+              return 'text-danger';
+            }
+            // Novos assessores com valores baixos (vermelho)
+            if (
+              ['Alex Rodriguez', 'Maria Silva', 'Carlos Santos'].includes(
+                String(item.name)
+              ) &&
+              (key === 'captadoAnual' ||
+                key === 'indiceSemestral' ||
+                key === 'captadoMensal' ||
+                key === 'percMensal')
+            ) {
+              return 'text-danger';
+            }
+            return '';
+          }}
         />
       </div>
     </div>
