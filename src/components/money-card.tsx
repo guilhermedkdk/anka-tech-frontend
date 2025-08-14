@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { GrowthIndicator } from './growth-indicator';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, ArrowDown } from 'lucide-react';
 
 interface MoneyCardProps {
   backgroundColor?: string;
@@ -41,23 +41,23 @@ export default function MoneyCard({
       }}
     >
       <CardContent className="px-8 py-10 flex flex-col justify-center items-start h-full">
-        <div className="text-left space-y-0">
+        <div className="text-left space-y-0 w-full">
           <h3
             className="text-lg font-medium leading-tight"
             style={{ color: textColor }}
           >
             {title}
           </h3>
-          <div className="flex items-baseline gap-6">
+          <div className="flex items-baseline gap-6 flex-nowrap">
             <p
-              className="text-4xl font-bold leading-tight"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight whitespace-nowrap"
               style={{ color: textColor }}
             >
               {amount}
             </p>
             {growthValue && (
               <div
-                className="flex items-center gap-[6px] flex-wrap transform -translate-y-1"
+                className="flex items-center gap-[6px] flex-nowrap transform -translate-y-1"
                 style={
                   {
                     '--growth-circle-color': growthCircleColor,
@@ -67,16 +67,29 @@ export default function MoneyCard({
               >
                 <div
                   className="w-6 h-6 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: growthCircleColor || '#C3FCBB' }}
+                  style={{
+                    backgroundColor:
+                      growthCircleColor || (isPositive ? '#C3FCBB' : '#FECACA'),
+                  }}
                 >
-                  <ArrowUp
-                    className="w-3.5 h-3.5"
-                    style={{ color: growthTextColor || '#0d8701' }}
-                  />
+                  {isPositive ? (
+                    <ArrowUp
+                      className="w-3.5 h-3.5"
+                      style={{ color: growthTextColor || '#0d8701' }}
+                    />
+                  ) : (
+                    <ArrowDown
+                      className="w-3.5 h-3.5"
+                      style={{ color: growthTextColor || '#dc2626' }}
+                    />
+                  )}
                 </div>
                 <span
                   className="text-base font-medium"
-                  style={{ color: growthTextColor || '#0d8701' }}
+                  style={{
+                    color:
+                      growthTextColor || (isPositive ? '#0d8701' : '#dc2626'),
+                  }}
                 >
                   {growthValue}
                 </span>
