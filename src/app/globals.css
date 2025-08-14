@@ -21,6 +21,8 @@
 :root {
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
   --primary: #13c4f1;
   --primary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.97 0 0);
@@ -48,6 +50,8 @@
   --foreground: #f8f8f8;
   --card: #292929;
   --card-foreground: #f8f8f8;
+  --popover: #292929;
+  --popover-foreground: #f8f8f8;
   --primary: #13c4f1;
   --primary-foreground: #292929;
   --muted: #292929;
@@ -201,20 +205,22 @@
 
 /* Padding personalizado para páginas principais */
 .main-page-padding {
-  padding: 24px 128px;
+  padding: 16px 24px;
   min-height: 100%;
   box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Versão responsiva para telas maiores */
 @media (min-width: 1024px) {
   .main-page-padding {
-    padding: 32px 128px;
+    padding: 20px 32px;
   }
 }
 
 @media (min-width: 1440px) {
   .main-page-padding {
-    padding: 40px 128px;
+    padding: 24px 40px;
   }
 }
