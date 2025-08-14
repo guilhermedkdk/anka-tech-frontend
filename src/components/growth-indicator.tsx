@@ -34,8 +34,8 @@ export function GrowthIndicator({
   const colors = positive
     ? {
         circle: 'bg-[#C3FCBB] dark:bg-[#53894B]',
-        icon: 'text-success-subtle',
-        text: 'text-success-subtle',
+        icon: 'text-success',
+        text: 'text-success',
       }
     : {
         circle: 'bg-red-100 dark:bg-red-900',

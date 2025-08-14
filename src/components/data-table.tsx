@@ -89,7 +89,7 @@ export const DataTable = React.memo(function DataTable({
             <h2 className="text-lg font-medium text-foreground mb-1">
               {title}
             </h2>
-            <p className="text-sm text-success-subtle">{subtitle}</p>
+            <p className="text-sm text-success">{subtitle}</p>
           </div>
 
           {/* Controles alinhados à direita */}

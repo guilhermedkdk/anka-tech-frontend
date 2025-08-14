@@ -9,19 +9,13 @@
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-text-success: var(--text-success);
-  --color-text-success-subtle: var(--text-success-subtle);
 }
 
 :root {
@@ -29,14 +23,8 @@
   --card-foreground: oklch(0.145 0 0);
   --primary: #13c4f1;
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: #dadada;
   --input: oklch(0.922 0 0);
   --ring: #13c4f1;
@@ -52,8 +40,7 @@
   --sidebar-active: #ededed;
   --logo-bg: #3b82f6;
   --logo-text: #ffffff;
-  --text-success: #16a34a;
-  --text-success-subtle: #0d8701;
+  --text-success: #0d8701;
 }
 
 .dark {
@@ -63,14 +50,8 @@
   --card-foreground: #f8f8f8;
   --primary: #13c4f1;
   --primary-foreground: #292929;
-  --secondary: #292929;
-  --secondary-foreground: #f8f8f8;
   --muted: #292929;
   --muted-foreground: #d1d1d1;
-  --accent: #292929;
-  --accent-foreground: #f8f8f8;
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: #424242;
   --input: #292929;
   --ring: #13c4f1;
@@ -85,7 +66,6 @@
   --logo-bg: #3b82f6;
   --logo-text: #ffffff;
   --text-success: #91d88a;
-  --text-success-subtle: #91d88a;
 }
 
 @layer base {
@@ -125,10 +105,6 @@
 
 .text-success {
   color: var(--text-success);
-}
-
-.text-success-subtle {
-  color: var(--text-success-subtle);
 }
 
 /* Classes utilitárias para o toggle de tema */
@@ -215,17 +191,6 @@
   filter: none !important;
 }
 
-/* Icone do botão de menu usando mask para herdar cor da variável */
-.menu-icon {
-  width: 20px;
-  height: 20px;
-  -webkit-mask: url('/icons/menu.svg') no-repeat center;
-  mask: url('/icons/menu.svg') no-repeat center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  background-color: var(--text-small);
-}
-
 /* Novo: máscara genérica para ícones herdarem a cor atual (currentColor) */
 .sidebar-icon-mask {
   width: 20px;
@@ -236,7 +201,7 @@
 
 /* Padding personalizado para páginas principais */
 .main-page-padding {
-  padding: 24px 32px;
+  padding: 24px 128px;
   min-height: 100%;
   box-sizing: border-box;
 }
@@ -244,12 +209,12 @@
 /* Versão responsiva para telas maiores */
 @media (min-width: 1024px) {
   .main-page-padding {
-    padding: 32px 48px;
+    padding: 32px 128px;
   }
 }
 
 @media (min-width: 1440px) {
   .main-page-padding {
-    padding: 40px 64px;
+    padding: 40px 128px;
   }
 }
