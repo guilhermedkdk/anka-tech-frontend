@@ -112,7 +112,7 @@ export const DataTable = React.memo(function DataTable({
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#818181] w-4 h-4" />
               <Input
-                placeholder="Buscar"
+                placeholder={searchPlaceholder}
                 className="pl-10 w-56 rounded-xl border-border bg-background text-foreground placeholder:text-[#818181] focus:!border-primary focus:!ring-0"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}

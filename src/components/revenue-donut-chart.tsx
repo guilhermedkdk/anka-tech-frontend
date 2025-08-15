@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import { ArrowUpRight, ArrowUp } from 'lucide-react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { ArrowUp } from 'lucide-react';
 
 const data = [
   { name: 'Reinaldo', value: 24, currency: 880_000, color: '#94A3B8' },
@@ -22,23 +22,6 @@ function formatCurrency(value: number): string {
     maximumFractionDigits: 0,
   }).format(value);
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active && payload && payload.length) {
-    const data = payload[0].payload;
-    return (
-      <div className="bg-card p-2 border border-border rounded-lg shadow-lg">
-        <p className="text-sm font-medium text-card-foreground">{data.name}</p>
-        <p className="text-sm text-muted-foreground">
-          {formatCurrency(data.currency)}
-        </p>
-        <p className="text-sm text-muted-foreground">{data.value}%</p>
-      </div>
-    );
-  }
-  return null;
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderLabel = (entry: any) => {

@@ -3,8 +3,9 @@
 import React, { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { api } from '@/lib/http';
 
 interface SidebarProps {
   isMinimized: boolean;
@@ -16,6 +17,7 @@ export const Sidebar = React.memo(function Sidebar({
   setIsMinimized,
 }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const menuItems = useMemo(
     () => [
@@ -28,23 +30,20 @@ export const Sidebar = React.memo(function Sidebar({
       {
         iconSrc: '/icons/net-new-money.svg',
         label: 'Net New Money',
-        href: null,
-        active: false,
-        disabled: true,
+        href: '/net-new-money',
+        active: pathname === '/net-new-money',
       },
       {
         iconSrc: '/icons/custodia.svg',
         label: 'Custódia',
-        href: null,
-        active: false,
-        disabled: true,
+        href: '/custodia',
+        active: pathname === '/custodia',
       },
       {
         iconSrc: '/icons/receitas.svg',
         label: 'Receitas',
-        href: null,
-        active: false,
-        disabled: true,
+        href: '/receitas',
+        active: pathname === '/receitas',
       },
       {
         iconSrc: '/icons/comissões.svg',
@@ -94,7 +93,7 @@ export const Sidebar = React.memo(function Sidebar({
         />
       </div>
 
-      {/* Menu Principal com botão de colapso */}
+      {/* Menu Principal */}
       <div className="px-0 mt-8">
         <div
           className={`${
@@ -123,71 +122,42 @@ export const Sidebar = React.memo(function Sidebar({
             />
           </Button>
         </div>
+
         <nav
           className={`flex flex-col gap-4 ${isMinimized ? 'items-center' : ''}`}
         >
-          {menuItems.map((item) => {
-            if (item.disabled) {
-              return (
-                <Button
-                  key={item.label}
-                  variant="ghost"
-                  className={`w-full ${itemBaseClasses} text-foreground opacity-50 cursor-not-allowed ${
-                    item.active
-                      ? 'bg-[var(--sidebar-active)] hover:bg-[var(--sidebar-active)] dark:hover:bg-[var(--sidebar-active)]'
-                      : 'hover:bg-transparent dark:hover:bg-transparent'
-                  }`}
-                  title={isMinimized ? item.label : undefined}
-                  disabled
-                >
-                  <span
-                    className="sidebar-icon-mask"
-                    style={{
-                      WebkitMask: `url(${item.iconSrc}) no-repeat center`,
-                      mask: `url(${item.iconSrc}) no-repeat center`,
-                      WebkitMaskSize: 'contain',
-                      maskSize: 'contain',
-                    }}
-                    aria-hidden="true"
-                  />
-                  {!isMinimized && item.label}
-                </Button>
-              );
-            }
-
-            return (
-              <Link key={item.label} href={item.href!}>
-                <Button
-                  variant="ghost"
-                  className={`w-full ${itemBaseClasses} text-foreground ${
-                    item.active
-                      ? 'bg-[var(--sidebar-active)] hover:bg-[var(--sidebar-active)] dark:hover:bg-[var(--sidebar-active)]'
-                      : 'hover:bg-transparent dark:hover:bg-transparent'
-                  } hover:text-[var(--primary)]`}
-                  title={isMinimized ? item.label : undefined}
-                  aria-current={item.active ? 'page' : undefined}
-                >
-                  <span
-                    className="sidebar-icon-mask"
-                    style={{
-                      WebkitMask: `url(${item.iconSrc}) no-repeat center`,
-                      mask: `url(${item.iconSrc}) no-repeat center`,
-                      WebkitMaskSize: 'contain',
-                      maskSize: 'contain',
-                    }}
-                    aria-hidden="true"
-                  />
-                  {!isMinimized && item.label}
-                </Button>
-              </Link>
-            );
-          })}
+          {menuItems.map((item) => (
+            <Link key={item.label} href={item.href}>
+              <Button
+                variant="ghost"
+                className={`w-full ${itemBaseClasses} text-foreground ${
+                  item.active
+                    ? 'bg-[var(--sidebar-active)] hover:bg-[var(--sidebar-active)] dark:hover:bg-[var(--sidebar-active)]'
+                    : 'hover:bg-transparent dark:hover:bg-transparent'
+                } hover:text-[var(--primary)]`}
+                title={isMinimized ? item.label : undefined}
+                aria-current={item.active ? 'page' : undefined}
+              >
+                <span
+                  className="sidebar-icon-mask"
+                  style={{
+                    WebkitMask: `url(${item.iconSrc}) no-repeat center`,
+                    mask: `url(${item.iconSrc}) no-repeat center`,
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                  }}
+                  aria-hidden="true"
+                />
+                {!isMinimized && item.label}
+              </Button>
+            </Link>
+          ))}
         </nav>
       </div>
 
-      <div className="flex-1"></div>
+      <div className="flex-1" />
 
-      {/* Seção de Ajustes no final da sidebar */}
+      {/* Ajustes */}
       <div className="px-0 pb-6">
         {!isMinimized && <p className="text-small text-sm mb-4">Ajustes</p>}
         <nav
@@ -205,6 +175,16 @@ export const Sidebar = React.memo(function Sidebar({
                     : 'text-foreground hover:text-[var(--primary)] hover:bg-transparent dark:hover:bg-transparent'
                 }`}
                 title={isMinimized ? item.label : undefined}
+                onClick={
+                  isLogout
+                    ? async () => {
+                        try {
+                          await api.post('/auth/logout'); // apaga cookies no backend
+                        } catch {}
+                        router.replace('/login');
+                      }
+                    : undefined
+                }
               >
                 {isLogout ? (
                   <Image
@@ -212,7 +192,7 @@ export const Sidebar = React.memo(function Sidebar({
                     alt={item.label}
                     width={20}
                     height={20}
-                    className={'sidebar-icon-fixed'}
+                    className="sidebar-icon-fixed"
                   />
                 ) : (
                   <span

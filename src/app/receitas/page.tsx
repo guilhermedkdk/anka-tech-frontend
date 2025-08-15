@@ -11,7 +11,7 @@ import {
 import TopRevenueAdvisors from '@/components/top-revenue-advisors';
 import RevenueDonutChart from '@/components/revenue-donut-chart';
 import { GrowthIndicator } from '@/components/growth-indicator';
-import { ChevronDown, TrendingUp, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 export default function ReceitasPage() {
   return (

@@ -1,6 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { GrowthIndicator } from './growth-indicator';
 import { ArrowUp, ArrowDown } from 'lucide-react';
 
 interface MoneyCardProps {

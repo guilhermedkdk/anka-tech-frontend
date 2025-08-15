@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import MoneyCard from '@/components/money-card';
 import { NetNewMoneyChart } from '@/components/net-new-money-chart';
 import { TotalAcumuladoChart } from '@/components/total-acumulado-chart';

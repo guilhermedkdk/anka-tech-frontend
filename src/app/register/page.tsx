@@ -15,7 +15,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Eye, EyeOff, User, Mail, Lock } from 'lucide-react';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,10 +41,6 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-dvh">
-      <div className="absolute top-6 right-6 z-10">
-        <ThemeToggle />
-      </div>
-
       <div className="flex min-h-dvh items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center space-y-6">

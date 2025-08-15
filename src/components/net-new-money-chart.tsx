@@ -79,13 +79,15 @@ export function NetNewMoneyChart({
     checkTheme();
 
     // Observer para mudanças no tema
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
+    if (typeof window !== 'undefined') {
+      const observer = new MutationObserver(checkTheme);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }
   }, []);
 
   // Gerar marcações do eixo Y
@@ -120,7 +122,7 @@ export function NetNewMoneyChart({
     const maxDotsPerColumn = Math.floor(maxValue / unitValue);
     const actualDots = Math.min(numDots, maxDotsPerColumn);
 
-    const dotColorTheme = isDark ? '#5269D1' : '#13C4F1';
+    const dotColorTheme = isDark ? '#5269D1' : dotColor;
 
     for (let i = 0; i < actualDots; i++) {
       dots.push(
@@ -212,11 +214,7 @@ export function NetNewMoneyChart({
                         style={{
                           padding: '12px',
                           fontSize: '14px',
-                          color: document.documentElement.classList.contains(
-                            'dark'
-                          )
-                            ? '#91D88A'
-                            : '#0D8701',
+                          color: isDark ? '#91D88A' : '#0D8701',
                         }}
                       >
                         <p className="font-medium">

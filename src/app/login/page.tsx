@@ -2,6 +2,7 @@
 
 import type React from 'react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,35 +14,37 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Eye, EyeOff, User, Lock } from 'lucide-react';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { api } from '@/lib/http';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: 'email' | 'password', value: string) =>
     setFormData((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log('Login attempt:', formData);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await api.post('/auth/login', {
+        email: formData.email,
+        password: formData.password,
+      }); // cookies httpOnly vêm no Set-Cookie
+
+      router.replace('/dashboard');
+    } catch {
+      alert('Login inválido. Verifique suas credenciais.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-dvh">
-      <div className="absolute top-6 right-6 z-10">
-        <ThemeToggle />
-      </div>
-
       <div className="flex min-h-dvh items-center justify-center p-4">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center space-y-6">
@@ -69,20 +72,20 @@ export default function LoginPage() {
               <form onSubmit={handleLogin} className="space-y-5">
                 <div className="space-y-2">
                   <Label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="text-sm font-medium text-small"
                   >
-                    Nome de usuário
+                    E-mail
                   </Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-small" />
+                    <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-small" />
                     <Input
-                      id="username"
-                      type="text"
-                      placeholder="Digite seu nome de usuário"
-                      value={formData.username}
+                      id="email"
+                      type="email"
+                      placeholder="Digite seu e-mail"
+                      value={formData.email}
                       onChange={(e) =>
-                        handleInputChange('username', e.target.value)
+                        handleInputChange('email', e.target.value)
                       }
                       className="pl-10 h-12 border-border bg-card text-foreground placeholder:text-small focus:!border-primary focus:!ring-0"
                       required

@@ -11,7 +11,6 @@ import {
   Tooltip,
 } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 
 const weeklyData = [
   { month: 'Seg', value: 5000000, label: 'Segunda' },
