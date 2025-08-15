@@ -64,3 +64,9 @@ src/
 - React-Hook-Form + Zod (forms/validação) ✔
 - Axios ✔
 - Tema claro/escuro (toggle) ✔
+
+<hr/>
+
+🚀 Projeto desenvolvido com dedicação e carinho.
+
+✨ Animado para poder contribuir profissionalmente com o time.
